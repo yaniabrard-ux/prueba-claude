@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triángulo Lencero Reptil · EmezetaBikinis</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --brand:     #c9504a;
+      --brand-dark:#a83c37;
+      --accent:    #f5ede8;
+      --text:      #1a1a1a;
+      --muted:     #6b6b6b;
+      --border:    #e8e0db;
+      --green:     #2e7d52;
+      --badge-bg:  #c9504a;
+      --white:     #ffffff;
+      --sand:      #faf7f4;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--sand);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--brand); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-icons { display: flex; gap: 1rem; }
+    .nav-icons button {
+      background: none; border: none; cursor: pointer; font-size: 1.2rem;
+      position: relative;
+    }
+    .cart-badge {
+      position: absolute; top: -6px; right: -6px;
+      background: var(--brand); color: white;
+      font-size: 0.6rem; font-weight: 700;
+      width: 16px; height: 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── BREADCRUMB ──────────────────────────────────── */
+    .breadcrumb {
+      padding: .75rem 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--brand); text-decoration: underline; }
+    .breadcrumb span { margin: 0 .4rem; }
+
+    /* ── PROMO STRIP ─────────────────────────────────── */
+    .promo-strip {
+      background: var(--text);
+      color: white;
+      text-align: center;
+      padding: .5rem 1rem;
+      font-size: 0.82rem;
+      letter-spacing: .3px;
+    }
+    .promo-strip strong { color: #f5c842; }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────── */
+    .product-page {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    /* ── GALLERY ─────────────────────────────────────── */
+    .gallery { display: flex; flex-direction: column; gap: 1rem; }
+
+    .gallery-main {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f0ebe7;
+      cursor: zoom-in;
+    }
+    .gallery-main img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .gallery-main:hover img { transform: scale(1.06); }
+
+    .badge-sold-out {
+      position: absolute; top: 1rem; left: 1rem;
+      background: var(--text); color: white;
+      font-size: 0.72rem; font-weight: 700;
+      padding: .3rem .7rem; border-radius: 4px;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .badge-discount {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--badge-bg); color: white;
+      font-size: 0.9rem; font-weight: 800;
+      padding: .35rem .75rem; border-radius: 6px;
+    }
+
+    .gallery-thumbs {
+      display: flex; gap: .6rem;
+    }
+    .gallery-thumbs button {
+      flex: 1; aspect-ratio: 1;
+      border-radius: 8px; overflow: hidden;
+      border: 2px solid transparent; cursor: pointer;
+      background: #f0ebe7; padding: 0;
+      transition: border-color .2s;
+    }
+    .gallery-thumbs button.active { border-color: var(--brand); }
+    .gallery-thumbs button img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── PRODUCT INFO ────────────────────────────────── */
+    .product-info { display: flex; flex-direction: column; gap: 1.25rem; padding-top: .5rem; }
+
+    .product-category {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brand);
+    }
+
+    .product-title {
+      font-size: 1.8rem; font-weight: 700; line-height: 1.25;
+      color: var(--text); letter-spacing: -.3px;
+    }
+
+    .stars-row {
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .stars { color: #f5c842; font-size: 1rem; letter-spacing: 1px; }
+    .stars-count { font-size: 0.82rem; color: var(--muted); text-decoration: underline; cursor: pointer; }
+
+    /* Price block */
+    .price-block { display: flex; flex-direction: column; gap: .3rem; }
+    .price-main {
+      display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap;
+    }
+    .price-current {
+      font-size: 2.1rem; font-weight: 800; color: var(--text);
+    }
+    .price-original {
+      font-size: 1.1rem; color: var(--muted);
+      text-decoration: line-through;
+    }
+    .price-saving {
+      font-size: 0.82rem; color: var(--green);
+      font-weight: 600;
+      background: #e8f5ee; padding: .2rem .55rem; border-radius: 4px;
+    }
+    .installments {
+      font-size: 0.9rem; color: var(--green); font-weight: 600;
+    }
+    .transfer-price {
+      font-size: 0.88rem; color: var(--muted);
+    }
+    .transfer-price strong { color: var(--text); }
+
+    /* Notify me (sin stock) */
+    .notify-box {
+      background: var(--accent);
+      border: 1px solid #e8d5cc;
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .notify-box p {
+      font-size: 0.9rem; color: var(--text);
+      margin-bottom: .75rem; font-weight: 500;
+    }
+    .notify-box p span { color: var(--brand); font-weight: 700; }
+    .notify-form { display: flex; gap: .5rem; }
+    .notify-form input {
+      flex: 1;
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: .65rem .9rem; font-size: 0.9rem;
+      outline: none; transition: border-color .2s;
+      background: white;
+    }
+    .notify-form input:focus { border-color: var(--brand); }
+    .notify-form button {
+      background: var(--brand); color: white;
+      border: none; border-radius: 8px;
+      padding: .65rem 1.2rem; font-size: 0.9rem;
+      font-weight: 600; cursor: pointer;
+      white-space: nowrap; transition: background .2s;
+    }
+    .notify-form button:hover { background: var(--brand-dark); }
+
+    /* Size selector */
+    .variants-section { display: flex; flex-direction: column; gap: .6rem; }
+    .variants-header {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .variants-label { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .size-guide-link {
+      font-size: 0.82rem; color: var(--brand); cursor: pointer;
+      text-decoration: underline; background: none; border: none;
+      font-family: inherit;
+    }
+    .size-buttons { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .size-btn {
+      padding: .5rem 1rem; border-radius: 7px;
+      border: 1.5px solid var(--border); background: white;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      transition: all .15s; color: var(--text);
+      min-width: 48px; text-align: center;
+    }
+    .size-btn:hover { border-color: var(--brand); color: var(--brand); }
+    .size-btn.selected {
+      border-color: var(--brand); background: var(--brand);
+      color: white;
+    }
+    .size-btn.disabled {
+      opacity: .4; cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    /* Color selector */
+    .color-section { display: flex; flex-direction: column; gap: .6rem; }
+    .color-label { font-size: 0.9rem; font-weight: 600; }
+    .color-buttons { display: flex; gap: .6rem; }
+    .color-btn {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2px solid transparent; cursor: pointer;
+      transition: all .15s; padding: 0;
+    }
+    .color-btn.selected { border-color: var(--brand); outline: 3px solid white; outline-offset: 1px; box-shadow: 0 0 0 3px var(--brand); }
+    .color-name { font-size: 0.82rem; color: var(--muted); margin-top: .2rem; }
+
+    /* CTA buttons */
+    .cta-group { display: flex; flex-direction: column; gap: .6rem; }
+    .btn-primary {
+      width: 100%; padding: 1rem;
+      background: var(--brand); color: white;
+      border: none; border-radius: 10px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      letter-spacing: .3px; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-primary:disabled {
+      background: #ccc; cursor: not-allowed;
+    }
+    .btn-secondary {
+      width: 100%; padding: .9rem;
+      background: white; color: var(--text);
+      border: 1.5px solid var(--border); border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer;
+      transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--text); }
+    .btn-wishlist {
+      display: flex; align-items: center; justify-content: center;
+      gap: .4rem; background: none; border: none;
+      color: var(--muted); font-size: 0.85rem; cursor: pointer;
+      padding: .4rem;
+    }
+    .btn-wishlist:hover { color: var(--brand); }
+
+    /* Trust badges */
+    .trust-badges {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: .6rem;
+    }
+    .trust-item {
+      background: white; border: 1px solid var(--border);
+      border-radius: 8px; padding: .65rem .5rem;
+      text-align: center;
+    }
+    .trust-icon { font-size: 1.3rem; display: block; margin-bottom: .25rem; }
+    .trust-text { font-size: 0.72rem; color: var(--muted); font-weight: 500; line-height: 1.3; }
+
+    /* Shipping estimator */
+    .shipping-box {
+      background: white; border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
+    }
+    .shipping-title { font-size: 0.88rem; font-weight: 600; margin-bottom: .6rem; }
+    .shipping-form { display: flex; gap: .5rem; }
+    .shipping-form input {
+      flex: 1; border: 1px solid var(--border); border-radius: 7px;
+      padding: .55rem .75rem; font-size: 0.88rem; outline: none;
+    }
+    .shipping-form input:focus { border-color: var(--brand); }
+    .shipping-form button {
+      background: var(--text); color: white; border: none;
+      border-radius: 7px; padding: .55rem 1rem;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    }
+    .shipping-result {
+      margin-top: .6rem; font-size: 0.83rem; color: var(--green);
+      font-weight: 600; display: none;
+    }
+
+    /* Accordion description */
+    .accordion { border-top: 1px solid var(--border); }
+    .accordion-item { border-bottom: 1px solid var(--border); }
+    .accordion-header {
+      width: 100%; display: flex; justify-content: space-between;
+      align-items: center; padding: .9rem 0;
+      background: none; border: none; cursor: pointer;
+      font-size: 0.92rem; font-weight: 600; color: var(--text);
+      font-family: inherit;
+    }
+    .accordion-icon { font-size: 1.1rem; color: var(--muted); transition: transform .2s; }
+    .accordion-body {
+      font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+      padding-bottom: 1rem; display: none;
+    }
+    .accordion-body.open { display: block; }
+    .accordion-icon.open { transform: rotate(45deg); }
+    .accordion-body ul { padding-left: 1.2rem; }
+    .accordion-body ul li { margin-bottom: .3rem; }
+
+    /* ── RELATED PRODUCTS ────────────────────────────── */
+    .related-section {
+      max-width: 1200px; margin: 3rem auto 4rem;
+      padding: 0 2rem;
+    }
+    .section-title {
+      font-size: 1.3rem; font-weight: 700; margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+    .related-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
+    }
+    .product-card {
+      background: white; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border); transition: box-shadow .2s;
+      cursor: pointer;
+    }
+    .product-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+    .product-card-img {
+      aspect-ratio: 3/4; background: #f0ebe7; overflow: hidden;
+    }
+    .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .product-card:hover img { transform: scale(1.05); }
+    .product-card-info { padding: .8rem; }
+    .product-card-name { font-size: 0.85rem; font-weight: 600; margin-bottom: .25rem; }
+    .product-card-price { font-size: 0.9rem; font-weight: 700; color: var(--brand); }
+    .product-card-old { font-size: 0.78rem; color: var(--muted); text-decoration: line-through; }
+
+    /* ── SIZE GUIDE MODAL ────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.5);
+      display: none; align-items: center; justify-content: center;
+      z-index: 200;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: white; border-radius: 14px;
+      max-width: 500px; width: 90%;
+      padding: 2rem; position: relative;
+      max-height: 80vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: none; font-size: 1.4rem;
+      cursor: pointer; color: var(--muted);
+    }
+    .modal h3 { font-size: 1.2rem; margin-bottom: 1rem; }
+    .size-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .size-table th, .size-table td {
+      border: 1px solid var(--border);
+      padding: .55rem .75rem; text-align: center;
+    }
+    .size-table th { background: var(--accent); font-weight: 600; }
+    .size-table tr:nth-child(even) td { background: var(--sand); }
+    .modal-note { font-size: 0.8rem; color: var(--muted); margin-top: .75rem; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--text); color: #ccc;
+      text-align: center; padding: 1.5rem;
+      font-size: 0.82rem;
+    }
+    footer a { color: #aaa; text-decoration: none; }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .product-page {
+        grid-template-columns: 1fr;
+        gap: 1.5rem; margin: 1rem auto;
+        padding: 0 1rem;
+      }
+      .product-title { font-size: 1.5rem; }
+      .price-current { font-size: 1.8rem; }
+      .related-grid { grid-template-columns: repeat(2,1fr); }
+      .nav-links { display: none; }
+      .trust-badges { grid-template-columns: repeat(3,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PROMO STRIP -->
+<div class="promo-strip">
+  Envío gratis en compras mayores a <strong>$30.000</strong> · 10% OFF pagando con transferencia
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">emezeta<span>bikinis</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Colecciones</a></li>
+    <li><a href="#">Bikinis</a></li>
+    <li><a href="#">Enterizas</a></li>
+    <li><a href="#">Sale</a></li>
+  </ul>
+  <div class="nav-icons">
+    <button aria-label="Buscar">🔍</button>
+    <button aria-label="Cuenta">👤</button>
+    <button aria-label="Carrito">
+      🛍️
+      <span class="cart-badge">2</span>
+    </button>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="#">Inicio</a>
+  <span>›</span>
+  <a href="#">Bikinis</a>
+  <span>›</span>
+  <a href="#">Triángulos</a>
+  <span>›</span>
+  Triángulo Lencero Reptil
+</div>
+
+<!-- PRODUCT PAGE -->
+<main class="product-page">
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gallery-main" id="mainImg">
+      <img src="https://placehold.co/800x1000/f0ebe7/c9504a?text=Foto+Principal" alt="Triángulo Lencero Reptil - vista frontal">
+      <span class="badge-sold-out">Sin stock</span>
+      <span class="badge-discount">-30%</span>
+    </div>
+    <div class="gallery-thumbs" id="thumbs">
+      <button class="active" onclick="setThumb(this, 'https://placehold.co/800x1000/f0ebe7/c9504a?text=Foto+1')">
+        <img src="https://placehold.co/200x200/f0ebe7/c9504a?text=1" alt="Vista 1">
+      </button>
+      <button onclick="setThumb(this, 'https://placehold.co/800x1000/e8e0db/6b6b6b?text=Foto+2')">
+        <img src="https://placehold.co/200x200/e8e0db/6b6b6b?text=2" alt="Vista 2">
+      </button>
+      <button onclick="setThumb(this, 'https://placehold.co/800x1000/faf7f4/c9504a?text=Foto+3')">
+        <img src="https://placehold.co/200x200/faf7f4/c9504a?text=3" alt="Vista 3">
+      </button>
+      <button onclick="setThumb(this, 'https://placehold.co/800x1000/f5ede8/a83c37?text=Foto+4')">
+        <img src="https://placehold.co/200x200/f5ede8/a83c37?text=4" alt="Vista 4">
+      </button>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="product-info">
+    <p class="product-category">Triangulos · Nueva colección</p>
+
+    <h1 class="product-title">Triángulo Lencero Reptil</h1>
+
+    <div class="stars-row">
+      <span class="stars">★★★★☆</span>
+      <span class="stars-count">24 opiniones</span>
+    </div>
+
+    <!-- PRECIO -->
+    <div class="price-block">
+      <div class="price-main">
+        <span class="price-current">$26.593</span>
+        <span class="price-original">$37.990</span>
+        <span class="price-saving">Ahorrás $11.397</span>
+      </div>
+      <p class="installments">6 cuotas de $4.432 sin interés 💳</p>
+      <p class="transfer-price">O <strong>$23.933</strong> pagando con transferencia (10% OFF)</p>
+    </div>
+
+    <!-- NOTIFICARME (sin stock) -->
+    <div class="notify-box">
+      <p>Este producto está <span>sin stock</span>. Dejanos tu email y te avisamos cuando vuelva a estar disponible:</p>
+      <div class="notify-form">
+        <input type="email" placeholder="tucorreo@ejemplo.com" aria-label="Email para notificación">
+        <button type="button">Avisame</button>
+      </div>
+    </div>
+
+    <!-- COLOR -->
+    <div class="color-section">
+      <span class="color-label">Color: <strong>Reptil Verde</strong></span>
+      <div class="color-buttons">
+        <button class="color-btn selected" style="background:#7a8c5f;" aria-label="Reptil Verde" title="Reptil Verde"></button>
+        <button class="color-btn" style="background:#c9504a;" aria-label="Coral" title="Coral" onclick="selectColor(this,'Coral')"></button>
+        <button class="color-btn" style="background:#e8d5cc;" aria-label="Nude" title="Nude" onclick="selectColor(this,'Nude')"></button>
+        <button class="color-btn" style="background:#1a1a1a;" aria-label="Negro" title="Negro" onclick="selectColor(this,'Negro')"></button>
+      </div>
+    </div>
+
+    <!-- TALLE -->
+    <div class="variants-section">
+      <div class="variants-header">
+        <span class="variants-label">Talle: <strong id="selectedSize">—</strong></span>
+        <button class="size-guide-link" onclick="openModal()">📏 Guía de talles</button>
+      </div>
+      <div class="size-buttons">
+        <button class="size-btn disabled" disabled aria-label="XS sin stock">XS</button>
+        <button class="size-btn" onclick="selectSize(this,'S')">S</button>
+        <button class="size-btn" onclick="selectSize(this,'M')">M</button>
+        <button class="size-btn disabled" disabled aria-label="L sin stock">L</button>
+        <button class="size-btn" onclick="selectSize(this,'XL')">XL</button>
+      </div>
+      <p style="font-size:.78rem; color:var(--muted);">XS y L sin stock · Los tachados no están disponibles</p>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-group">
+      <button class="btn-primary" id="addToCart" disabled>
+        Seleccioná un talle para agregar
+      </button>
+      <button class="btn-secondary">Comprar ahora</button>
+      <button class="btn-wishlist">
+        🤍 Guardar en favoritos
+      </button>
+    </div>
+
+    <!-- TRUST BADGES -->
+    <div class="trust-badges">
+      <div class="trust-item">
+        <span class="trust-icon">🚚</span>
+        <span class="trust-text">Envío gratis +$30k</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🔄</span>
+        <span class="trust-text">Cambios gratuitos</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        <span class="trust-text">Pago seguro</span>
+      </div>
+    </div>
+
+    <!-- ENVÍO ESTIMADO -->
+    <div class="shipping-box">
+      <p class="shipping-title">📍 Calcular envío</p>
+      <div class="shipping-form">
+        <input type="text" placeholder="Ingresá tu código postal" maxlength="8" id="cpInput">
+        <button onclick="calcShipping()">Calcular</button>
+      </div>
+      <p class="shipping-result" id="shippingResult"></p>
+    </div>
+
+    <!-- ACCORDION -->
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Descripción del producto
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body open">
+          <p>Corpiño triangulito estilo lencero con estampado reptil. Ideal para combinar con nuestra colección de ropa de playa.</p>
+          <ul style="margin-top:.6rem;">
+            <li>Tela: 80% Poliamida, 20% Elastano</li>
+            <li>Cierre trasero ajustable</li>
+            <li>Aros removibles</li>
+            <li>Uso en agua y fuera del agua</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Cuidados del producto
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>Lavar a mano con agua fría</li>
+            <li>No usar lavandina ni suavizante</li>
+            <li>No secar en secadora</li>
+            <li>No centrifugar</li>
+            <li>Guardar sin doblar los aros</li>
+          </ul>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          Envíos y devoluciones
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>Envío gratis en compras mayores a $30.000</li>
+            <li>Despacho en 24–48 hs hábiles</li>
+            <li>Cambio por talle: hasta 30 días de la compra</li>
+            <li>El producto debe estar sin usar, con etiquetas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /product-info -->
+</main>
+
+<!-- RELATED PRODUCTS -->
+<section class="related-section">
+  <h2 class="section-title">Completá el look</h2>
+  <div class="related-grid">
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="https://placehold.co/300x400/f0ebe7/c9504a?text=Bombacha+Reptil" alt="Bombacha Reptil">
+      </div>
+      <div class="product-card-info">
+        <p class="product-card-name">Bombacha Reptil</p>
+        <p class="product-card-price">$18.500</p>
+        <p class="product-card-old">$26.400</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="https://placehold.co/300x400/e8e0db/6b6b6b?text=Tiro+alto+reptil" alt="Tiro alto reptil">
+      </div>
+      <div class="product-card-info">
+        <p class="product-card-name">Tiro Alto Reptil</p>
+        <p class="product-card-price">$21.200</p>
+        <p class="product-card-old">$30.200</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="https://placehold.co/300x400/faf7f4/c9504a?text=Pareo+estampado" alt="Pareo estampado">
+      </div>
+      <div class="product-card-info">
+        <p class="product-card-name">Pareo Estampado</p>
+        <p class="product-card-price">$12.800</p>
+        <p class="product-card-old">—</p>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-card-img">
+        <img src="https://placehold.co/300x400/f5ede8/a83c37?text=Top+lencero+coral" alt="Top lencero coral">
+      </div>
+      <div class="product-card-info">
+        <p class="product-card-name">Top Lencero Coral</p>
+        <p class="product-card-price">$24.990</p>
+        <p class="product-card-old">$35.700</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="modal-overlay" id="sizeModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">×</button>
+    <h3 id="modalTitle">📏 Guía de talles — Triangulos</h3>
+    <table class="size-table">
+      <thead>
+        <tr>
+          <th>Talle</th>
+          <th>Contorno pecho (cm)</th>
+          <th>Contorno bajo pecho (cm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>XS</td><td>76–80</td><td>62–64</td></tr>
+        <tr><td>S</td><td>80–84</td><td>64–68</td></tr>
+        <tr><td>M</td><td>84–88</td><td>68–72</td></tr>
+        <tr><td>L</td><td>88–92</td><td>72–76</td></tr>
+        <tr><td>XL</td><td>92–96</td><td>76–80</td></tr>
+      </tbody>
+    </table>
+    <p class="modal-note">* Si estás entre dos talles, te recomendamos elegir el talle mayor. Para más consultas escribinos por Instagram.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 EmezetaBikinis · <a href="#">Instagram</a> · <a href="#">WhatsApp</a> · <a href="#">Preguntas frecuentes</a></p>
+</footer>
+
+<script>
+  // Gallery thumbnails
+  function setThumb(btn, src) {
+    document.querySelectorAll('#thumbs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelector('#mainImg img').src = src;
+  }
+
+  // Size selector
+  function selectSize(btn, size) {
+    document.querySelectorAll('.size-btn:not(.disabled)').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('selectedSize').textContent = size;
+    const cartBtn = document.getElementById('addToCart');
+    cartBtn.disabled = false;
+    cartBtn.textContent = 'Agregar al carrito';
+  }
+
+  // Color selector
+  function selectColor(btn, name) {
+    document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    btn.closest('.color-section').querySelector('strong').textContent = name;
+  }
+
+  // Accordion
+  function toggleAccordion(header) {
+    const body = header.nextElementSibling;
+    const icon = header.querySelector('.accordion-icon');
+    body.classList.toggle('open');
+    icon.classList.toggle('open');
+  }
+
+  // Size guide modal
+  function openModal() {
+    document.getElementById('sizeModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('sizeModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('sizeModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Shipping estimator
+  function calcShipping() {
+    const cp = document.getElementById('cpInput').value.trim();
+    const result = document.getElementById('shippingResult');
+    if (!cp || cp.length < 4) {
+      result.textContent = 'Ingresá un código postal válido.';
+      result.style.color = 'var(--brand)';
+    } else {
+      result.textContent = '✓ Envío a ' + cp + ': llegará en 3–5 días hábiles · $1.890';
+      result.style.color = 'var(--green)';
+    }
+    result.style.display = 'block';
+  }
+
+  // Notify me
+  document.querySelector('.notify-form button').addEventListener('click', function() {
+    const input = document.querySelector('.notify-form input');
+    if (input.value.includes('@')) {
+      this.textContent = '¡Listo! ✓';
+      this.style.background = 'var(--green)';
+      input.disabled = true;
+      this.disabled = true;
+    } else {
+      input.style.borderColor = 'var(--brand)';
+      input.focus();
+    }
+  });
+</script>
+
+</body>
+</html>
