@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wiltel – Prepará tu casa para darle Play al Mundial</title>
+  <style>
+    /* ─── Reset & base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0a0a1a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0d0d2b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 900;
+      color: #00d4ff;
+      letter-spacing: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .nav-links a:hover { color: #00d4ff; }
+    .nav-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .nav-cta .btn-outline {
+      border: 1.5px solid #00d4ff;
+      color: #00d4ff;
+      padding: 7px 18px;
+      border-radius: 4px;
+    }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      min-height: 90vh;
+      background: linear-gradient(135deg, #0a0a2e 0%, #1a0a4e 40%, #2d0a6e 70%, #1a1a5e 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 80px 40px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(120,0,255,.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 30%, rgba(0,150,255,.15) 0%, transparent 60%);
+    }
+    /* Swirl accent lines */
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 55%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Cellipse cx='400' cy='300' rx='350' ry='280' fill='none' stroke='rgba(100,50,255,0.15)' stroke-width='80'/%3E%3Cellipse cx='420' cy='290' rx='250' ry='200' fill='none' stroke='rgba(0,180,255,0.1)' stroke-width='60'/%3E%3C/svg%3E") center/cover no-repeat;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 580px;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+      margin-bottom: 24px;
+      opacity: .85;
+    }
+    .hero-badges span::before { content: '▶ '; color: #00d4ff; }
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 15px;
+      opacity: .75;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, #7b2fff, #00bfff);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: .85; }
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border: 2px solid rgba(255,255,255,.4);
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: #fff; }
+
+    /* Play orb */
+    .hero-orb {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(180px, 22vw, 300px);
+      aspect-ratio: 1;
+      background: radial-gradient(circle at 40% 40%, rgba(255,255,255,.15), rgba(120,0,255,.4));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 80px rgba(120,0,255,.5), 0 0 160px rgba(0,150,255,.2);
+      z-index: 1;
+    }
+    .hero-orb::after {
+      content: '▶';
+      font-size: clamp(40px, 5vw, 70px);
+      color: rgba(255,255,255,.9);
+      margin-left: 8px;
+    }
+
+    /* ─── COUNTDOWN ─────────────────────────────────────────────── */
+    .countdown-bar {
+      background: #111125;
+      padding: 32px 40px;
+      text-align: center;
+      border-top: 2px solid rgba(100,50,255,.3);
+      border-bottom: 2px solid rgba(100,50,255,.3);
+    }
+    .countdown-bar p {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      opacity: .6;
+      margin-bottom: 16px;
+    }
+    .countdown-units {
+      display: flex;
+      justify-content: center;
+      gap: clamp(16px, 4vw, 48px);
+    }
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .countdown-number {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,.6) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .countdown-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .5;
+    }
+
+    /* ─── FEATURES ──────────────────────────────────────────────── */
+    .features {
+      background: linear-gradient(180deg, #0d1535 0%, #1a2060 50%, #0d1535 100%);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .section-eyebrow {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #7b9fff;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 15px;
+      opacity: .65;
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .feature-card:hover { border-color: rgba(0,212,255,.4); transform: translateY(-4px); }
+    .feature-icon {
+      font-size: 30px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .feature-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+    .feature-card p { font-size: 12px; opacity: .6; line-height: 1.6; }
+
+    /* ─── COMBOS ────────────────────────────────────────────────── */
+    .combos {
+      background: #0a0a1a;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .combos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .combo-card {
+      background: #0f0f2e;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: left;
+      position: relative;
+      transition: transform .2s;
+    }
+    .combo-card:hover { transform: translateY(-6px); }
+    .combo-badge {
+      position: absolute;
+      top: -12px;
+      left: 24px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+    .badge-start { background: #333; color: #aaa; }
+    .badge-full { background: #7b2fff; color: #fff; }
+    .badge-pro { background: linear-gradient(90deg, #ff6b00, #ffaa00); color: #fff; }
+    .combo-name {
+      font-size: 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .combo-name span { font-size: 14px; opacity: .6; }
+    .combo-speeds {
+      font-size: 12px;
+      opacity: .65;
+      margin-bottom: 16px;
+    }
+    .combo-price-old {
+      font-size: 13px;
+      opacity: .5;
+      text-decoration: line-through;
+      margin-bottom: 2px;
+    }
+    .combo-price {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .combo-price sup { font-size: .5em; vertical-align: super; }
+    .combo-price-label { font-size: 12px; opacity: .55; margin-bottom: 20px; }
+    .combo-features { list-style: none; font-size: 12px; opacity: .7; line-height: 2; margin-bottom: 24px; }
+    .combo-features li::before { content: '✓ '; color: #7b2fff; }
+    .btn-combo {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border: 2px solid rgba(255,255,255,.2);
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-combo:hover { background: rgba(255,255,255,.08); border-color: #fff; }
+    .combo-card.featured { border-color: #7b2fff; box-shadow: 0 0 40px rgba(123,47,255,.2); }
+    .combo-card.featured .btn-combo { background: #7b2fff; border-color: #7b2fff; }
+    .combo-card.featured .btn-combo:hover { background: #6a1fff; }
+
+    /* ─── PROMO ─────────────────────────────────────────────────── */
+    .promo {
+      background: linear-gradient(135deg, #0d0d2e 0%, #1a0a4e 60%, #0d1540 100%);
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .promo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 60%, rgba(100,0,255,.18) 0%, transparent 70%);
+    }
+    .promo-inner { position: relative; z-index: 1; }
+    .promo-video {
+      width: min(500px, 90%);
+      aspect-ratio: 16/9;
+      margin: 32px auto;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a0050 0%, #001a50 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 20px 80px rgba(0,0,0,.5);
+    }
+    .promo-video-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #200060, #001060);
+      opacity: .8;
+    }
+    .promo-play-btn {
+      position: relative;
+      z-index: 1;
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .promo-play-btn:hover { background: rgba(255,255,255,.25); }
+    .promo-video-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 22px;
+      font-weight: 900;
+      color: rgba(255,255,255,.9);
+      letter-spacing: 1px;
+    }
+    .promo-desc {
+      max-width: 540px;
+      margin: 0 auto 32px;
+      font-size: 15px;
+      opacity: .7;
+      line-height: 1.7;
+    }
+    .promo-chances {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .chance-pill {
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border: 1.5px solid rgba(255,255,255,.2);
+    }
+    .chance-pill.active { border-color: #7b2fff; background: rgba(123,47,255,.15); }
+    .non-client {
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .non-client p { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+
+    /* ─── CONTACT ───────────────────────────────────────────────── */
+    .contact {
+      background: #0d0d2e;
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .contact-form {
+      max-width: 500px;
+      margin: 40px auto 0;
+      display: grid;
+      gap: 16px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .contact-form input,
+    .contact-form textarea {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: #fff;
+      font-size: 14px;
+      width: 100%;
+      transition: border-color .2s;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { opacity: .4; }
+    .contact-form input:focus,
+    .contact-form textarea:focus { outline: none; border-color: #7b2fff; }
+    .contact-form textarea { resize: vertical; min-height: 100px; }
+    .btn-submit {
+      background: linear-gradient(90deg, #7b2fff, #00bfff);
+      border: none;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-submit:hover { opacity: .85; }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      background: #080818;
+      padding: 48px 40px 24px;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-logo { font-size: 28px; font-weight: 900; color: #00d4ff; letter-spacing: 3px; margin-bottom: 12px; }
+    .footer-tagline { font-size: 12px; opacity: .5; line-height: 1.6; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; opacity: .5; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { font-size: 13px; opacity: .7; margin-bottom: 8px; cursor: pointer; transition: opacity .2s; }
+    .footer-col li:hover { opacity: 1; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      opacity: .4;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .social-links { display: flex; gap: 16px; }
+    .social-icon {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      opacity: .7;
+      cursor: pointer;
+      transition: opacity .2s, border-color .2s;
+    }
+    .social-icon:hover { opacity: 1; border-color: #00d4ff; }
+
+    /* ─── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 60px 20px; }
+      .hero-orb { display: none; }
+      .countdown-bar, .features, .combos, .promo, .contact { padding: 60px 20px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 40px 20px 20px; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">W WILTEL</div>
+    <ul class="nav-links">
+      <li><a href="#">Combos</a></li>
+      <li><a href="#">Fibra</a></li>
+      <li><a href="#">PlayMe</a></li>
+      <li><a href="#">Servicios de Atención</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#">Mi Wiltel</a>
+      <a href="tel:+549999999999" class="btn-outline">+54 9 999 9999</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badges">
+        <span>Fibra óptica disponible</span>
+        <span>Ahora desde quince</span>
+        <span>+32 años conectándonos</span>
+      </div>
+      <h1>Prepará<br>tu casa para<br>darle play<br>al Mundial</h1>
+      <p>Fibra óptica + PlayMe para que no te pierdas ni un segundo.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary">▶ Elegir mi combo</button>
+        <button class="btn-secondary">Quiero que me llamen</button>
+      </div>
+    </div>
+    <div class="hero-orb"></div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="countdown-bar">
+    <p>La cuenta regresiva ya empezó</p>
+    <div class="countdown-units">
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-days">78</span>
+        <span class="countdown-label">Días</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-hours">03</span>
+        <span class="countdown-label">Horas</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-mins">21</span>
+        <span class="countdown-label">Min.</span>
+      </div>
+      <div class="countdown-unit">
+        <span class="countdown-number" id="cd-secs">43</span>
+        <span class="countdown-label">Seg.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <p class="section-eyebrow">Cada vez falta menos</p>
+    <h2 class="section-title">Preparate para<br>vivirlo en serio</h2>
+    <p class="section-subtitle">
+      Todo lo que necesitás para ver el Mundial sin cortes,<br>
+      en la mejor calidad y desde cualquier pantalla.
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📶</span>
+        <h3>Fibra Óptica</h3>
+        <p>Hasta 1 Gbps de velocidad simétrica para todos tus dispositivos.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎮</span>
+        <h3>PlayMe</h3>
+        <p>Contenidos de TV en vivo y on demand desde cualquier pantalla.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📺</span>
+        <h3>Full Box</h3>
+        <p>Smart TV + Full Box para disfrutar en pantalla grande.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📡</span>
+        <h3>Mesh</h3>
+        <p>WiFi en todos los rincones de tu hogar sin puntos muertos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMBOS -->
+  <section class="combos">
+    <p class="section-eyebrow">Ofertas exclusivas</p>
+    <h2 class="section-title">Combos Mundiales</h2>
+    <p class="section-subtitle">
+      Elegí el tuyo y sumá chances de ganarte un smart TV para tu casa.
+    </p>
+    <div class="combos-grid">
+
+      <!-- START -->
+      <div class="combo-card">
+        <span class="combo-badge badge-start">Start</span>
+        <div class="combo-name">START <span>▶</span></div>
+        <div class="combo-speeds">Hasta 300 Mb · PlayMe HD</div>
+        <div class="combo-price-old">$ 49.990 por mes</div>
+        <div class="combo-price"><sup>$</sup>39.990</div>
+        <div class="combo-price-label">por mes</div>
+        <ul class="combo-features">
+          <li>Fibra óptica 300 Mb</li>
+          <li>PlayMe HD incluido</li>
+          <li>1 chance de ganar</li>
+        </ul>
+        <button class="btn-combo">Lo quiero</button>
+      </div>
+
+      <!-- FULL -->
+      <div class="combo-card featured">
+        <span class="combo-badge badge-full">¡LLEVA MÁS!</span>
+        <div class="combo-name">FULL <span>▶▶</span></div>
+        <div class="combo-speeds">Hasta 300 Mb · PlayMe Full</div>
+        <div class="combo-price-old">$ 52.990 por mes</div>
+        <div class="combo-price"><sup>$</sup>42.990</div>
+        <div class="combo-price-label">por mes</div>
+        <ul class="combo-features">
+          <li>Fibra óptica 300 Mb</li>
+          <li>PlayMe Full + canales premium</li>
+          <li>2 chances de ganar ⭐⭐</li>
+        </ul>
+        <button class="btn-combo">Lo quiero</button>
+      </div>
+
+      <!-- PRO -->
+      <div class="combo-card">
+        <span class="combo-badge badge-pro">Popular</span>
+        <div class="combo-name">PRO <span>▶▶▶</span></div>
+        <div class="combo-speeds">Hasta 500 Mb · PlayMe Pro + Mesh</div>
+        <div class="combo-price-old">$ 79.990 por mes</div>
+        <div class="combo-price"><sup>$</sup>66.990</div>
+        <div class="combo-price-label">por mes</div>
+        <ul class="combo-features">
+          <li>Fibra óptica 500 Mb</li>
+          <li>PlayMe Pro + todos los canales</li>
+          <li>Nodo Mesh incluido</li>
+          <li>3 chances de ganar ⭐⭐⭐</li>
+        </ul>
+        <button class="btn-combo">Lo quiero</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROMO -->
+  <section class="promo">
+    <div class="promo-inner">
+      <p class="section-eyebrow">Sumá chances de ganar premios</p>
+      <h2 class="section-title">Dale play al Mundial<br>con Wiltel</h2>
+
+      <div class="promo-video">
+        <div class="promo-video-bg"></div>
+        <span class="promo-video-label">PLAY</span>
+        <div class="promo-play-btn">▶</div>
+      </div>
+
+      <p class="promo-desc">
+        Con cada combo participás automáticamente. Cuanto más completo
+        tu combo, ¡más chances tenés de ganar!
+      </p>
+
+      <div class="promo-chances">
+        <div class="chance-pill">START ★ 1 CHANCE</div>
+        <div class="chance-pill active">FULL ★★ 2 CHANCES</div>
+        <div class="chance-pill">PRO ★★★ 3 CHANCES</div>
+      </div>
+
+      <div class="non-client">
+        <p>¿No sos cliente Wiltel?</p>
+        <button class="btn-primary">▶ Participá acá</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <p class="section-eyebrow">¿Querés asesoramiento?</p>
+    <h2 class="section-title">Te contactamos</h2>
+    <p class="section-subtitle">
+      Dejanos tus datos y uno de nuestros asesores te contactará.
+    </p>
+    <form class="contact-form" onsubmit="return false;">
+      <input type="text" placeholder="Nombre y apellido" />
+      <div class="form-row">
+        <input type="tel" placeholder="Teléfono" />
+        <input type="text" placeholder="Localidad" />
+      </div>
+      <textarea placeholder="Consulta"></textarea>
+      <button type="submit" class="btn-submit">Enviar consulta</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">WILTEL</div>
+        <p class="footer-tagline">
+          Sucursales: CABA · Palermo<br>
+          San Jorge · Juan Grela<br>
+          Villa Mercedes · Río Cuarto<br>
+          Centro de Atención Integral<br>
+          0800-444-9156
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li>Fibra Óptica</li>
+          <li>PlayMe TV</li>
+          <li>Combos</li>
+          <li>Mesh WiFi</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Atención</h4>
+        <ul>
+          <li>Política de Privacidad</li>
+          <li>Términos y condiciones</li>
+          <li>Defensa al Consumidor</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes sociales</h4>
+        <div class="social-links">
+          <div class="social-icon">f</div>
+          <div class="social-icon">in</div>
+          <div class="social-icon">▶</div>
+          <div class="social-icon">✉</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Wiltel. Todos los derechos reservados.</span>
+      <span>Política de Privacidad · Términos y Condiciones del Servicio</span>
+    </div>
+  </footer>
+
+  <!-- COUNTDOWN SCRIPT -->
+  <script>
+    // Target: 2026 FIFA World Cup opening (Jun 11, 2026)
+    const target = new Date('2026-06-11T00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000)  / 60000);
+      const secs  = Math.floor((diff % 60000)    / 1000);
+      document.getElementById('cd-days').textContent  = String(days).padStart(2, '0');
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-mins').textContent  = String(mins).padStart(2, '0');
+      document.getElementById('cd-secs').textContent  = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
