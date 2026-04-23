@@ -449,6 +449,173 @@
         .footer-links a { color: #78716C; text-decoration: none; font-size: .85rem; }
         .footer-links a:hover { color: var(--amber); }
 
+        /* ── PRODUCT DESCRIPTION ─────────────────── */
+        .product-desc { background: var(--cream); }
+        .desc-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 48px;
+            align-items: start;
+            margin-top: 48px;
+        }
+        .desc-sticky { position: sticky; top: 80px; }
+
+        .desc-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+        .desc-badge {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--white);
+            border: 1px solid #E7E5E4;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: .85rem; font-weight: 600; color: var(--text);
+        }
+
+        .desc-block { margin-bottom: 40px; }
+        .desc-block-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--amber-light);
+        }
+
+        .desc-problems { display: flex; flex-direction: column; gap: 12px; }
+        .desc-problem-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: #FFF7ED; border: 1px solid #FED7AA;
+            border-radius: 12px; padding: 16px;
+        }
+        .desc-problem-item .prob-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .desc-problem-item h4 { font-size: .95rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+        .desc-problem-item p  { font-size: .85rem; color: var(--text-light); }
+
+        .desc-features { display: flex; flex-direction: column; gap: 12px; }
+        .desc-feature-item {
+            display: flex; align-items: flex-start; gap: 14px;
+            background: var(--white); border: 1px solid #E7E5E4;
+            border-radius: 12px; padding: 16px;
+        }
+        .feat-icon {
+            width: 44px; height: 44px;
+            background: var(--amber-light); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; flex-shrink: 0;
+        }
+        .desc-feature-item h4 { font-size: .95rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+        .desc-feature-item p  { font-size: .85rem; color: var(--text-light); }
+
+        .desc-steps { display: flex; flex-direction: column; gap: 16px; }
+        .desc-step { display: flex; align-items: flex-start; gap: 16px; }
+        .desc-step-num {
+            width: 36px; height: 36px;
+            background: var(--amber); color: var(--dark);
+            font-weight: 700; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: .95rem;
+        }
+        .desc-step h4 { font-size: .95rem; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+        .desc-step p  { font-size: .85rem; color: var(--text-light); }
+
+        .desc-benefits-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .desc-benefits-list li {
+            display: flex; align-items: center; gap: 10px;
+            font-size: .95rem; color: var(--text);
+        }
+        .desc-benefits-list li span {
+            width: 24px; height: 24px;
+            background: var(--amber); color: var(--dark);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: .75rem; font-weight: 700; flex-shrink: 0;
+        }
+
+        .desc-testimonials { display: flex; flex-direction: column; gap: 16px; }
+        .desc-testimonial {
+            background: var(--white);
+            border-radius: 12px; padding: 20px;
+            border-left: 3px solid var(--amber);
+        }
+        .desc-testimonial .stars { font-size: 1rem; color: var(--amber); margin-bottom: 8px; }
+        .desc-testimonial blockquote { font-style: italic; font-size: .9rem; color: var(--text); margin-bottom: 10px; line-height: 1.6; }
+        .desc-testimonial-author { font-size: .8rem; font-weight: 600; color: var(--text-light); }
+
+        .desc-price-card {
+            background: var(--white);
+            border: 2px solid var(--amber);
+            border-radius: 20px; padding: 32px 28px; text-align: center;
+        }
+        .desc-price-tag  { font-size: 2.8rem; font-weight: 700; color: var(--amber); margin-bottom: 4px; }
+        .desc-price-note { color: var(--text-light); font-size: .85rem; margin-bottom: 24px; }
+        .desc-price-includes { list-style: none; text-align: left; margin-bottom: 24px; }
+        .desc-price-includes li {
+            display: flex; align-items: center; gap: 10px;
+            font-size: .9rem; color: var(--text);
+            padding: 8px 0; border-bottom: 1px solid #F4F4F5;
+        }
+        .desc-price-includes li:last-child { border-bottom: none; }
+        .desc-buy-btn {
+            display: block;
+            background: var(--amber); color: var(--dark);
+            font-weight: 700; font-size: 1rem;
+            padding: 16px; border-radius: 50px;
+            text-decoration: none; margin-bottom: 12px;
+            transition: all .2s;
+            box-shadow: 0 4px 16px rgba(245,158,11,.3);
+        }
+        .desc-buy-btn:hover { background: var(--amber-dark); transform: translateY(-2px); }
+        .desc-security { color: var(--text-light); font-size: .82rem; margin-top: 8px; }
+
+        .desc-guarantee-box {
+            display: flex; align-items: flex-start; gap: 12px;
+            margin-top: 16px;
+            background: var(--amber-light);
+            border-radius: 12px; padding: 16px;
+        }
+        .desc-guarantee-box .guar-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .desc-guarantee-box p { font-size: .85rem; color: var(--text); line-height: 1.5; }
+
+        @media (max-width: 900px) {
+            .desc-layout { grid-template-columns: 1fr; }
+            .desc-sticky { position: static; }
+        }
+
+        /* ── CROSSELLING ──────────────────────────── */
+        .crosselling { background: var(--white); }
+        .cross-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cross-card {
+            background: var(--cream);
+            border: 1px solid #E7E5E4;
+            border-radius: 20px; padding: 32px 24px; text-align: center;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .cross-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,.08); }
+        .cross-icon { font-size: 3.5rem; margin-bottom: 16px; }
+        .cross-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; color: var(--dark);
+            margin-bottom: 10px; line-height: 1.3;
+        }
+        .cross-card p { font-size: .88rem; color: var(--text-light); margin-bottom: 20px; line-height: 1.6; }
+        .cross-price { font-size: 1.7rem; font-weight: 700; color: var(--amber); margin-bottom: 20px; }
+        .cross-btn {
+            display: inline-block;
+            background: var(--dark); color: var(--white);
+            font-weight: 600; font-size: .9rem;
+            padding: 12px 28px; border-radius: 50px;
+            text-decoration: none; transition: all .2s;
+        }
+        .cross-btn:hover { background: var(--amber); color: var(--dark); }
+
+        @media (max-width: 600px) { .cross-grid { grid-template-columns: 1fr; } }
+
         /* ── RESPONSIVE ───────────────────────────── */
         @media (max-width: 768px) {
             .hero .container { grid-template-columns: 1fr; text-align: center; }
@@ -521,6 +688,181 @@
         <div class="trust-bar-item">🚀 Envío a todo el país</div>
     </div>
 </div>
+
+<!-- ══════════════════════════════════════════
+     DESCRIPCIÓN DEL PRODUCTO
+══════════════════════════════════════════ -->
+<section class="product-desc">
+    <div class="container">
+        <div class="text-center">
+            <div class="section-label">Descripción del producto</div>
+            <h2 class="section-title">Luz LED de Lectura Portátil<br>Pura Letra</h2>
+        </div>
+        <div class="desc-layout">
+
+            <!-- ── COLUMNA IZQUIERDA: info ──────── -->
+            <div class="desc-left">
+
+                <!-- Barra de confianza -->
+                <div class="desc-block">
+                    <div class="desc-badges">
+                        <div class="desc-badge">🔋 Batería larga duración</div>
+                        <div class="desc-badge">🔌 Recarga USB universal</div>
+                        <div class="desc-badge">🎛️ 3 modos de luz</div>
+                        <div class="desc-badge">📐 Cabeza orientable 360°</div>
+                        <div class="desc-badge">🚀 Envío a todo el país</div>
+                    </div>
+                </div>
+
+                <!-- Problema -->
+                <div class="desc-block">
+                    <div class="desc-block-title">¿Por qué la necesitás?</div>
+                    <div class="desc-problems">
+                        <div class="desc-problem-item">
+                            <span class="prob-icon">😩</span>
+                            <div>
+                                <h4>Luz que molesta a otros</h4>
+                                <p>Encender el velador para leer en la cama despierta a tu pareja o hijos. ¿Resultado? Dejás de leer.</p>
+                            </div>
+                        </div>
+                        <div class="desc-problem-item">
+                            <span class="prob-icon">👁️</span>
+                            <div>
+                                <h4>Ojos cansados</h4>
+                                <p>Leer con mala iluminación fuerza la vista. Dolores de cabeza, ojos rojos y a las 10 páginas ya no podés más.</p>
+                            </div>
+                        </div>
+                        <div class="desc-problem-item">
+                            <span class="prob-icon">🌑</span>
+                            <div>
+                                <h4>Lugares sin buena luz</h4>
+                                <p>Avión, colectivo, sala de espera... el momento perfecto para leer llega, pero la luz no acompaña.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Características -->
+                <div class="desc-block">
+                    <div class="desc-block-title">Características principales</div>
+                    <div class="desc-features">
+                        <div class="desc-feature-item">
+                            <div class="feat-icon">🎛️</div>
+                            <div>
+                                <h4>3 modos de iluminación</h4>
+                                <p>Luz fría para concentración máxima, cálida para lectura nocturna relajada y potencia máxima cuando necesitás ver cada detalle.</p>
+                            </div>
+                        </div>
+                        <div class="desc-feature-item">
+                            <div class="feat-icon">🔋</div>
+                            <div>
+                                <h4>Recargable por USB</h4>
+                                <p>Sin pilas, sin cables raros. Cargala desde cualquier cargador de teléfono, computadora o powerbank. La batería dura muchísimo.</p>
+                            </div>
+                        </div>
+                        <div class="desc-feature-item">
+                            <div class="feat-icon">🔧</div>
+                            <div>
+                                <h4>Cabeza 100% orientable + clip universal</h4>
+                                <p>Ajustá el ángulo exacto que necesitás y sujetala a cualquier libro, agenda o cuaderno con facilidad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cómo funciona -->
+                <div class="desc-block">
+                    <div class="desc-block-title">Cómo funciona</div>
+                    <div class="desc-steps">
+                        <div class="desc-step">
+                            <div class="desc-step-num">1</div>
+                            <div>
+                                <h4>Cargala con USB</h4>
+                                <p>Conectala a cualquier fuente USB. En 1-2 horas tenés batería para horas de lectura sin interrupciones.</p>
+                            </div>
+                        </div>
+                        <div class="desc-step">
+                            <div class="desc-step-num">2</div>
+                            <div>
+                                <h4>Sujetala a tu libro</h4>
+                                <p>El clip universal se adapta a libros, agendas o cuadernos. Firme, estable y sin dañar las páginas.</p>
+                            </div>
+                        </div>
+                        <div class="desc-step">
+                            <div class="desc-step-num">3</div>
+                            <div>
+                                <h4>Elegí tu modo y leé</h4>
+                                <p>Seleccioná la intensidad que mejor se adapte al momento y disfrutá de una lectura perfecta.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beneficios -->
+                <div class="desc-block">
+                    <div class="desc-block-title">Beneficios</div>
+                    <ul class="desc-benefits-list">
+                        <li><span>✓</span> Ultra liviana — entra en cualquier cartera o mochila</li>
+                        <li><span>✓</span> No molesta a nadie — ilumina solo lo que necesitás</li>
+                        <li><span>✓</span> Cuida tu vista — luz uniforme sin parpadeo</li>
+                        <li><span>✓</span> Ideal para viajes — avión, tren, colectivo, hotel</li>
+                        <li><span>✓</span> Versátil — sirve para libros, agendas y cuadernos</li>
+                    </ul>
+                </div>
+
+                <!-- Testimonios -->
+                <div class="desc-block">
+                    <div class="desc-block-title">Lo que dicen quienes ya la tienen</div>
+                    <div class="desc-testimonials">
+                        <div class="desc-testimonial">
+                            <div class="stars">★★★★★</div>
+                            <blockquote>"La uso todas las noches en la cama sin molestar a mi marido. La luz cálida es perfecta y la batería dura mucho más de lo esperado."</blockquote>
+                            <div class="desc-testimonial-author">Valentina M. · Buenos Aires</div>
+                        </div>
+                        <div class="desc-testimonial">
+                            <div class="stars">★★★★★</div>
+                            <blockquote>"La compré para los viajes en avión. El clip agarra bien y el modo frío me mantiene despierto en vuelos largos. 10/10."</blockquote>
+                            <div class="desc-testimonial-author">Matías R. · Córdoba</div>
+                        </div>
+                        <div class="desc-testimonial">
+                            <div class="stars">★★★★★</div>
+                            <blockquote>"Se la regalé a mi mamá y quedó encantada. Ahora lee hasta las 2AM sin quejarse de los ojos. ¡Compra obligada!"</blockquote>
+                            <div class="desc-testimonial-author">Camila P. · Rosario</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /desc-left -->
+
+            <!-- ── COLUMNA DERECHA: precio + garantía (sticky) ── -->
+            <div class="desc-sticky">
+                <div class="desc-price-card">
+                    <div class="pricing-badge">🔥 Oferta de lanzamiento</div>
+                    <div class="desc-price-tag">$33.000</div>
+                    <div class="desc-price-note">Precio final · Envío incluido</div>
+                    <ul class="desc-price-includes">
+                        <li><span class="check">✓</span> Luz LED portátil Pura Letra</li>
+                        <li><span class="check">✓</span> 3 modos de iluminación</li>
+                        <li><span class="check">✓</span> Cable USB incluido</li>
+                        <li><span class="check">✓</span> Clip ajustable universal</li>
+                        <li><span class="check">✓</span> Cabeza 360° orientable</li>
+                        <li><span class="check">✓</span> Envío a todo el país</li>
+                    </ul>
+                    <a href="https://www.puraletra.com.ar/productos/luz-led-de-lectura-portatil-9br2z"
+                       class="desc-buy-btn" target="_blank">
+                        Comprar ahora →
+                    </a>
+                    <div class="desc-security">🔒 Pago seguro · Tienda oficial Pura Letra</div>
+                </div>
+                <div class="desc-guarantee-box">
+                    <div class="guar-icon">🛡️</div>
+                    <p><strong>Tu satisfacción es nuestra prioridad.</strong> Comprás con total confianza. Si tenés algún inconveniente, nuestro equipo te acompaña en todo momento.</p>
+                </div>
+            </div><!-- /desc-sticky -->
+
+        </div><!-- /desc-layout -->
+    </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      PROBLEMA
@@ -778,6 +1120,37 @@
             <div class="faq-item">
                 <div class="faq-q">¿Puedo usarla en el auto o en transporte público?</div>
                 <div class="faq-a">¡Perfectamente! Es una de las situaciones para las que fue diseñada. Liviana, portátil y sin necesidad de enchufes — ideal para avión, colectivo o tren.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CROSSELLING
+══════════════════════════════════════════ -->
+<section class="crosselling">
+    <div class="container">
+        <div class="text-center">
+            <div class="section-label">También te puede interesar</div>
+            <h2 class="section-title">Completá tu kit lector</h2>
+            <p class="section-subtitle">Más productos Pura Letra pensados para llevar tu experiencia lectora al siguiente nivel.</p>
+        </div>
+        <div class="cross-grid">
+            <div class="cross-card">
+                <div class="cross-icon">🔍</div>
+                <h3>Lupa Lector con Luz by Pura Letra</h3>
+                <p>Lupa de lectura con iluminación LED integrada. Ideal para textos pequeños, mapas, etiquetas y lectura cómoda en cualquier condición de luz.</p>
+                <div class="cross-price">$26.000</div>
+                <a href="https://www.puraletra.com.ar/productos/lupa-lector-con-luz-by-pura-letra-107mj"
+                   class="cross-btn" target="_blank">Ver producto →</a>
+            </div>
+            <div class="cross-card">
+                <div class="cross-icon">🔖</div>
+                <h3>Señalador Imantado de Cuero by Pura Letra</h3>
+                <p>Marcapáginas magnético de cuero genuino. No daña las páginas, no se cae y le da un toque elegante a cualquier libro.</p>
+                <div class="cross-price">$12.000</div>
+                <a href="https://www.puraletra.com.ar/productos/senalador-imantado-de-cuero-by-pura-letra-knxqz"
+                   class="cross-btn" target="_blank">Ver producto →</a>
             </div>
         </div>
     </div>
