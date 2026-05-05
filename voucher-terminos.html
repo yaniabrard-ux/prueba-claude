@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Condiciones de Vouchers — Pura Letra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink:       #1c1a18;
+      --paper:     #faf8f4;
+      --warm-mid:  #f0ebe0;
+      --accent:    #7c4a2d;
+      --accent-lt: #a86340;
+      --rule:      #d9cfc0;
+      --muted:     #7a7060;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* ── Header ────────────────────────────────────────── */
+    header {
+      background-color: var(--ink);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--paper);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--accent-lt);
+    }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .hero {
+      background-color: var(--warm-mid);
+      border-bottom: 1px solid var(--rule);
+      padding: 72px 40px 60px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .hero-lead {
+      max-width: 620px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* ── Layout ─────────────────────────────────────────── */
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 72px 40px 100px;
+    }
+
+    /* ── Section cards ──────────────────────────────────── */
+    .section-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .section-item {
+      background: #fff;
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .section-item:hover {
+      box-shadow: 0 4px 20px rgba(28, 26, 24, 0.08);
+    }
+
+    .section-inner {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0;
+    }
+
+    .section-number {
+      background-color: var(--warm-mid);
+      border-right: 1px solid var(--rule);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 26px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .section-body {
+      padding: 24px 28px 28px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .section-text {
+      color: #4a4540;
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .section-text p + p {
+      margin-top: 10px;
+    }
+
+    /* ── Divider ────────────────────────────────────────── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 56px 0 48px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .divider-icon {
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    /* ── Quote ──────────────────────────────────────────── */
+    .quote-block {
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--ink);
+      border-radius: 6px;
+    }
+
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      line-height: 0.5;
+      color: var(--accent-lt);
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      font-style: italic;
+      color: var(--paper);
+      line-height: 1.55;
+    }
+
+    .quote-attr {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent-lt);
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 28px 40px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header  { padding: 20px 24px; }
+      .hero   { padding: 48px 24px 40px; }
+      main    { padding: 48px 20px 72px; }
+      footer  { padding: 24px 20px; }
+
+      .section-inner {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .section-body {
+        padding: 20px 18px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="#">Pura <span>Letra</span></a>
+  </header>
+
+  <div class="hero">
+    <p class="hero-eyebrow">Información importante</p>
+    <h1>Condiciones de<br>uso de vouchers</h1>
+    <p class="hero-lead">
+      En Pura Letra creemos que regalar libros es regalar experiencias.
+      Para garantizar un uso claro, ordenado y justo para todos nuestros clientes,
+      los vouchers se rigen por las siguientes condiciones.
+    </p>
+  </div>
+
+  <main>
+
+    <ul class="section-list">
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">1</div>
+          <div class="section-body">
+            <h2 class="section-title">Uso del voucher</h2>
+            <p class="section-text">
+              El voucher es válido como medio de pago por el monto indicado y deberá ser
+              utilizado en una única compra, sin posibilidad de fraccionar su uso en
+              distintas operaciones.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">2</div>
+          <div class="section-body">
+            <h2 class="section-title">Saldo</h2>
+            <div class="section-text">
+              <p>
+                En caso de que el importe de la compra sea menor al valor del voucher,
+                no se reintegrará la diferencia ni quedará saldo a favor.
+              </p>
+              <p>
+                Si la compra supera el monto del voucher, se podrá abonar la diferencia
+                mediante los medios de pago disponibles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">3</div>
+          <div class="section-body">
+            <h2 class="section-title">Cambios y devoluciones</h2>
+            <p class="section-text">
+              Los vouchers no son reembolsables en dinero, ni pueden ser canjeados
+              por efectivo total ni parcialmente.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">4</div>
+          <div class="section-body">
+            <h2 class="section-title">Vigencia</h2>
+            <p class="section-text">
+              El voucher no posee fecha de vencimiento.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">5</div>
+          <div class="section-body">
+            <h2 class="section-title">Disponibilidad de productos</h2>
+            <p class="section-text">
+              El canje del voucher estará sujeto al stock disponible al momento
+              de su utilización.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">6</div>
+          <div class="section-body">
+            <h2 class="section-title">Presentación</h2>
+            <p class="section-text">
+              Para su uso, deberá presentarse el voucher al momento de la compra.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">7</div>
+          <div class="section-body">
+            <h2 class="section-title">Condiciones de uso</h2>
+            <p class="section-text">
+              Las condiciones del presente reglamento se encuentran disponibles al
+              momento de la compra y pueden ser consultadas en los canales oficiales
+              de Pura Letra.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="section-item">
+        <div class="section-inner">
+          <div class="section-number">8</div>
+          <div class="section-body">
+            <h2 class="section-title">Aceptación</h2>
+            <p class="section-text">
+              La adquisición y/o utilización del voucher implica el conocimiento
+              y aceptación de las presentes condiciones.
+            </p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="divider">
+      <span class="divider-icon">✦</span>
+    </div>
+
+    <div class="quote-block">
+      <span class="quote-mark">"</span>
+      <p class="quote-text">El mejor viaje empieza en una librería.</p>
+      <p class="quote-attr">— Pura Letra</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Pura Letra. Todos los derechos reservados.</p>
+  </footer>
+
+</body>
+</html>
