@@ -4,135 +4,126 @@
    Pegar en: Apariencia > Editar código > custom.css
    ============================================= */
 
-/* ------ ÍCONO DE LUPA (botón que abre el buscador) ------ */
 
-/* Le damos fondo amarillo y forma de píldora para que resalte sobre el violeta */
-.header__icons .header__search-toggle,
-.js-search-toggle,
-[data-store="search"] button,
-.header__search-toggle {
+/* ---- BOTÓN LUPA (clases reales del tema Río) ---- */
+
+/* Contenedor del ícono */
+.utilities-container {
+  position: relative;
+}
+
+/* El enlace del buscador */
+a.js-search-button.utilities-link {
   background-color: #F5C200;        /* amarillo Pura Letra */
   border-radius: 20px;
-  padding: 7px 14px;
+  padding: 6px 14px;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: background-color 0.25s ease, transform 0.2s ease;
-  border: none;
-  cursor: pointer;
+  text-decoration: none;
 }
 
-.header__icons .header__search-toggle:hover,
-.js-search-toggle:hover,
-.header__search-toggle:hover {
+a.js-search-button.utilities-link:hover {
   background-color: #e6b400;
   transform: scale(1.06);
 }
 
-/* Ícono SVG dentro del botón lupa */
-.header__search-toggle svg,
-.js-search-toggle svg {
+/* SVG del ícono lupa (open y close) */
+a.js-search-button .utilities-icon {
   fill: #5B2D8E;                    /* violeta Pura Letra */
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
+  transition: fill 0.2s ease;
 }
 
-/* Texto "Buscar" al lado del ícono (opcional — solo si el tema lo permite) */
-.header__search-toggle::after {
+a.js-search-button:hover .utilities-icon {
+  fill: #3d1a6e;
+}
+
+/* Texto "Buscar" al lado del ícono */
+a.js-search-button.utilities-link::after {
   content: "Buscar";
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: #5B2D8E;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
 }
 
 
-/* ------ OVERLAY / CAMPO QUE APARECE AL HACER CLIC ------ */
+/* ---- PANEL DE BÚSQUEDA QUE SE ABRE (nav-search overlay) ---- */
 
-/* Fondo del panel de búsqueda cuando se expande */
-.header__search-overlay,
-.search-overlay,
-.js-search-overlay {
-  background-color: #5B2D8E;        /* violeta */
-  padding: 16px 24px;
-  box-shadow: 0 6px 20px rgba(91, 45, 142, 0.35);
+#nav-search,
+.js-nav-search {
+  background-color: #5B2D8E;
+  padding: 16px 20px;
+  box-shadow: 0 6px 18px rgba(91, 45, 142, 0.4);
 }
 
-/* Input de texto dentro del overlay */
-.header__search-overlay input[type="search"],
-.header__search-overlay input[type="text"],
-.search-overlay input,
-.js-search-overlay input,
-.search__input {
+/* Input dentro del panel */
+#nav-search input[type="search"],
+#nav-search input[type="text"],
+.js-nav-search input {
   width: 100%;
-  max-width: 600px;
-  padding: 13px 22px;
+  padding: 12px 20px;
   font-size: 16px;
-  border: 3px solid #F5C200;        /* borde amarillo */
+  border: 3px solid #F5C200;
   border-radius: 30px;
   background-color: #ffffff;
   color: #333;
   outline: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 0 transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.header__search-overlay input:focus,
-.search-overlay input:focus,
-.js-search-overlay input:focus,
-.search__input:focus {
+#nav-search input:focus,
+.js-nav-search input:focus {
   border-color: #C2187A;            /* magenta al enfocar */
   box-shadow: 0 0 0 5px rgba(194, 24, 122, 0.2);
 }
 
 /* Placeholder */
-.search__input::placeholder,
-.header__search-overlay input::placeholder {
-  color: #aaa;
+#nav-search input::placeholder {
+  color: #bbb;
   font-style: italic;
 }
 
-/* Botón de enviar búsqueda (lupa dentro del input) */
-.search__submit,
-.header__search-overlay button[type="submit"],
-.search-overlay button[type="submit"] {
+/* Botón submit dentro del panel */
+#nav-search button[type="submit"],
+.js-nav-search button[type="submit"] {
   background-color: #F5C200;
   border: none;
   border-radius: 50%;
   width: 44px;
   height: 44px;
+  flex-shrink: 0;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.search__submit:hover,
-.header__search-overlay button[type="submit"]:hover {
-  background-color: #C2187A;        /* hover magenta */
+#nav-search button[type="submit"]:hover {
+  background-color: #C2187A;
   transform: scale(1.1);
 }
 
-.search__submit svg,
-.header__search-overlay button[type="submit"] svg {
+#nav-search button[type="submit"] svg,
+#nav-search button[type="submit"] .utilities-icon {
   fill: #5B2D8E;
   width: 20px;
   height: 20px;
 }
 
 
-/* ------ MOBILE ------ */
-@media (max-width: 768px) {
-  .header__search-toggle::after {
-    display: none;                  /* en mobile solo el ícono, sin texto */
+/* ---- MOBILE: ocultar texto "Buscar" en pantallas muy chicas ---- */
+@media (max-width: 400px) {
+  a.js-search-button.utilities-link::after {
+    display: none;
   }
-
-  .header__search-overlay input[type="search"],
-  .header__search-overlay input[type="text"],
-  .search__input {
-    font-size: 15px;
-    padding: 11px 18px;
+  a.js-search-button.utilities-link {
+    padding: 6px 8px;
+    border-radius: 50%;
   }
 }
