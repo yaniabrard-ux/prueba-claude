@@ -1,0 +1,111 @@
+/* =========================================================
+   BUSCADOR ENFATIZADO — Template Rio (Tienda Nube)
+   Pegar en: Admin > Personalizar > Edición avanzada de CSS
+   ========================================================= */
+
+/* --- Contenedor del buscador en el header --- */
+.js-header-search,
+.header-search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 480px;
+}
+
+/* --- Formulario expandido (siempre visible, no solo al hacer clic) --- */
+.js-header-search .js-search-form,
+.header-search .header-search__form {
+  display: flex !important;
+  width: 100%;
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* --- Efecto al enfocar el input --- */
+.js-header-search .js-search-form:focus-within,
+.header-search .header-search__form:focus-within {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* --- Campo de texto --- */
+.js-header-search .js-search-input,
+.header-search .header-search__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 16px;
+  font-size: 15px;
+  color: #ffffff;
+  min-width: 0;
+}
+
+/* Color del placeholder */
+.js-header-search .js-search-input::placeholder,
+.header-search .header-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Texto e ícono en negro cuando el campo está activo (fondo blanco) */
+.js-header-search .js-search-form:focus-within .js-search-input,
+.header-search .header-search__form:focus-within .header-search__input {
+  color: #333333;
+}
+
+.js-header-search .js-search-form:focus-within .js-search-input::placeholder,
+.header-search .header-search__form:focus-within .header-search__input::placeholder {
+  color: #aaaaaa;
+}
+
+/* --- Botón de búsqueda (lupa) dentro del formulario --- */
+.js-header-search .header-search__submit,
+.header-search .header-search__submit {
+  border: none;
+  background: transparent;
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+.js-header-search .js-search-form:focus-within .header-search__submit,
+.header-search .header-search__form:focus-within .header-search__submit {
+  color: #6a0dad; /* morado de la marca */
+}
+
+/* Ícono SVG/font dentro del botón submit */
+.js-header-search .header-search__submit .icon,
+.header-search .header-search__submit .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Ocultar el botón toggle (lupa suelta) si el form ya es visible --- */
+.header-search__toggle,
+.js-search-toggle {
+  display: none !important;
+}
+
+/* --- Responsivo: en móvil se muestra como barra completa bajo el header --- */
+@media (max-width: 768px) {
+  .js-header-search,
+  .header-search {
+    max-width: 100%;
+    width: 100%;
+    padding: 8px 16px;
+  }
+
+  .js-header-search .js-search-form,
+  .header-search .header-search__form {
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+}
