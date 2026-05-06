@@ -1,0 +1,91 @@
+/* =============================================
+   BUSCADOR LLAMATIVO - Tema Río (Tienda Nube)
+   Pegar en: Apariencia > Editar código > custom.css
+   ============================================= */
+
+/* Contenedor del buscador en el header */
+.header__search,
+.js-header-search,
+.search-form {
+  flex: 1;
+  max-width: 480px;
+  margin: 0 16px;
+}
+
+/* Input del buscador */
+.header__search input[type="search"],
+.header__search input[type="text"],
+.js-search-input,
+input.search__input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 30px;
+  background-color: #f7f7f7;
+  color: #333;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Estado focus: cuando el usuario hace clic */
+.header__search input[type="search"]:focus,
+.header__search input[type="text"]:focus,
+.js-search-input:focus,
+input.search__input:focus {
+  border-color: #3d9be9;       /* Cambiá este color por el de tu marca */
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(61, 155, 233, 0.15);
+  transform: scale(1.02);
+}
+
+/* Placeholder */
+.header__search input::placeholder,
+.js-search-input::placeholder,
+input.search__input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Botón / ícono de búsqueda */
+.header__search button,
+.header__search .search__button,
+.js-search-button {
+  background-color: #3d9be9;   /* Mismo color que el foco */
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__search button:hover,
+.header__search .search__button:hover,
+.js-search-button:hover {
+  background-color: #2a7fc4;
+  transform: scale(1.1);
+}
+
+/* ---- VERSIÓN MOBILE ---- */
+@media (max-width: 768px) {
+  .header__search,
+  .js-header-search,
+  .search-form {
+    max-width: 100%;
+    margin: 8px 0;
+  }
+
+  .header__search input[type="search"],
+  .header__search input[type="text"],
+  .js-search-input,
+  input.search__input {
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+}
